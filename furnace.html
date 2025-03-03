@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Furnace - Field Engineer Shift Report</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
         body {
             background-color: #121212;
@@ -28,7 +29,7 @@
             margin: 15px 0 5px;
             font-size: 1.2rem;
         }
-        input, select, button {
+        input, select, textarea, button {
             width: 100%;
             padding: 10px;
             margin: 5px 0 15px;
@@ -67,6 +68,16 @@
 <body>
     <h1>FURNACE</h1>
     <form>
+        <label>Date</label>
+        <input type="date" required>
+        
+        <label>Shift</label>
+        <select>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+        </select>
+
         <label>Name of the Engineer</label>
         <input type="text" required>
 
