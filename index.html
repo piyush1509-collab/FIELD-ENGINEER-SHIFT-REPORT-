@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Field Engineer Shift Report</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
         /* Dark theme with modern UI */
         body {
@@ -26,23 +27,10 @@
             color: #bbbbbb;
         }
 
-        .input-container {
-            margin-bottom: 20px;
-        }
-
-        input, select {
-            padding: 10px;
-            font-size: 1rem;
-            border-radius: 5px;
-            border: none;
-            margin: 5px;
-            width: 200px;
-        }
-
         .btn-container {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
             flex-wrap: wrap;
         }
 
@@ -50,17 +38,24 @@
             background: #1e88e5;
             color: white;
             border: none;
-            padding: 15px 30px;
+            padding: 15px 40px;
             font-size: 1.2rem;
             cursor: pointer;
             border-radius: 10px;
             transition: 0.3s;
             box-shadow: 0 4px 10px rgba(0, 188, 212, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .btn:hover {
             background: #1565c0;
             transform: translateY(-2px);
+        }
+
+        .btn i {
+            font-size: 1.5rem;
         }
     </style>
 </head>
@@ -69,25 +64,14 @@
     <h1>FIELD ENGINEER SHIFT REPORT</h1>
     <h2>Please select your area</h2>
 
-    <div class="input-container">
-        <label for="date">Date:</label>
-        <input type="date" id="date" required>
-        
-        <label for="shift">Shift:</label>
-        <select id="shift">
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="C">C</option>
-        </select>
-    </div>
-
     <div class="btn-container">
-        <button class="btn">FURNACE</button>
-        <button class="btn">PUMP HOUSE</button>
-        <button class="btn">GAS ZONE</button>
-        <button class="btn">DISPATCH</button>
-        <button class="btn">MATERIAL HANDLING</button>
+        <button class="btn"><i class="fas fa-fire"></i> FURNACE</button>
+        <button class="btn"><i class="fas fa-tint"></i> PUMP HOUSE</button>
+        <button class="btn"><i class="fas fa-gas-pump"></i> GAS ZONE</button>
+        <button class="btn"><i class="fas fa-truck"></i> DISPATCH</button>
+        <button class="btn"><i class="fas fa-boxes"></i> MATERIAL HANDLING</button>
     </div>
 
 </body>
 </html>
+
