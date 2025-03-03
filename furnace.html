@@ -7,15 +7,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #f4f4f4;
+            background-color: #121212;
+            color: #ffffff;
         }
         .container {
             max-width: 800px;
-            background: white;
+            background: #1e1e1e;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            box-shadow: 0px 0px 10px rgba(255,255,255,0.1);
             margin-top: 20px;
+        }
+        .form-label {
+            font-weight: bold;
         }
     </style>
 </head>
@@ -23,52 +27,76 @@
     <div class="container">
         <h2 class="text-center">Furnace Shift Report</h2>
         <form>
+            <h4>Name Fields</h4>
             <div class="mb-3">
                 <label class="form-label">Name of the Engineer *</label>
-                <input type="text" class="form-control" required>
+                <input type="text" class="form-control bg-dark text-white" required>
             </div>
-            
             <div class="mb-3">
                 <label class="form-label">Technician *</label>
-                <input type="text" class="form-control" required>
+                <input type="text" class="form-control bg-dark text-white" required>
             </div>
             
+            <h4>CONE DRAINS *</h4>
             <div class="mb-3">
-                <label class="form-label">CONE DRAINS *</label><br>
-                <input type="radio" name="cone_drain" value="YES"> YES
-                <input type="radio" name="cone_drain" value="NO"> NO
+                <label class="form-label">CGS DRAIN</label><br>
+                <input type="radio" name="cgs_drain" value="YES"> YES
+                <input type="radio" name="cgs_drain" value="NO"> NO
+            </div>
+            <div class="mb-3">
+                <label class="form-label">TGS DRAIN</label><br>
+                <input type="radio" name="tgs_drain" value="YES"> YES
+                <input type="radio" name="tgs_drain" value="NO"> NO
             </div>
             
+            <h4>CLEANING *</h4>
             <div class="mb-3">
-                <label class="form-label">Cleaning *</label><br>
-                <input type="radio" name="cleaning" value="YES"> YES
-                <input type="radio" name="cleaning" value="NO"> NO
+                <label class="form-label">FLEXOWELL RETURN SIDE</label><br>
+                <input type="radio" name="cleaning1" value="YES"> YES
+                <input type="radio" name="cleaning1" value="NO"> NO
             </div>
             
+            <h4>EQUIPMENTS RUNNING STATUS *</h4>
             <div class="mb-3">
-                <label class="form-label">Equipments Running Status *</label><br>
-                <input type="radio" name="equipment_status" value="YES"> YES
-                <input type="radio" name="equipment_status" value="NO"> NO
+                <label class="form-label">HDRI FEED</label><br>
+                <input type="radio" name="hdri_feed" value="YES"> YES
+                <input type="radio" name="hdri_feed" value="NO"> NO
             </div>
             
+            <h4>PUMPS RUNNING STATUS *</h4>
             <div class="mb-3">
-                <label class="form-label">Pumps Running Status *</label><br>
-                <select class="form-select" required>
+                <label class="form-label">PCDC DED</label>
+                <select class="form-select bg-dark text-white" required>
                     <option value="A">A</option>
                     <option value="B">B</option>
                     <option value="BOTH">Both</option>
                 </select>
             </div>
             
+            <h4>SPILLAGES *</h4>
             <div class="mb-3">
-                <label class="form-label">Spillages *</label><br>
+                <label class="form-label">FLEXOWELL WATER</label><br>
                 <input type="radio" name="spillages" value="YES"> YES
                 <input type="radio" name="spillages" value="NO"> NO
             </div>
             
+            <h4>Description *</h4>
             <div class="mb-3">
-                <label class="form-label">Description *</label>
-                <textarea class="form-control" rows="3" required></textarea>
+                <textarea class="form-control bg-dark text-white" rows="3" required></textarea>
+            </div>
+            
+            <h4>Additional Fields</h4>
+            <div class="mb-3">
+                <label class="form-label">Date</label>
+                <input type="date" class="form-control bg-dark text-white" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Shift</label>
+                <select class="form-select bg-dark text-white" required>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                </select>
             </div>
             
             <button type="submit" class="btn btn-primary w-100">Submit Report</button>
