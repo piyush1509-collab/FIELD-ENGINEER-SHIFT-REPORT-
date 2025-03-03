@@ -3,79 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Furnace Section</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
-</head>
-<body>
-    <h1>Furnace Section</h1>
-    
-    <section>
-        <h2>1. CONE DRAINS</h2>
-        <div class="sub-section">
-            <label>(i) CGS DRAIN</label>
-            <input type="checkbox" class="yes" id="cgs-yes"><label for="cgs-yes">✅</label>
-            <input type="checkbox" class="no" id="cgs-no"><label for="cgs-no">❌</label>
-        </div>
-        <div class="sub-section">
-            <label>(ii) TGS DRAIN</label>
-            <input type="checkbox" class="yes" id="tgs-yes"><label for="tgs-yes">✅</label>
-            <input type="checkbox" class="no" id="tgs-no"><label for="tgs-no">❌</label>
-        </div>
-        <div class="sub-section">
-            <label>(iii) HDRI DED</label>
-            <input type="checkbox" class="yes" id="hdri-yes"><label for="hdri-yes">✅</label>
-            <input type="checkbox" class="no" id="hdri-no"><label for="hdri-no">❌</label>
-        </div>
-    </section>
-    
-    <section>
-        <h2>2. GAS SYSTEM</h2>
-        <div class="sub-section">
-            <label>(i) GAS VALVE</label>
-            <input type="checkbox" class="yes" id="gas-valve-yes"><label for="gas-valve-yes">✅</label>
-            <input type="checkbox" class="no" id="gas-valve-no"><label for="gas-valve-no">❌</label>
-        </div>
-        <div class="sub-section">
-            <label>(ii) BURNER CHECK</label>
-            <input type="checkbox" class="yes" id="burner-yes"><label for="burner-yes">✅</label>
-            <input type="checkbox" class="no" id="burner-no"><label for="burner-no">❌</label>
-        </div>
-    </section>
-
+    <title>Furnace Shift Report</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #1e1e1e;
-            color: white;
-            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
         }
-        h2 {
-            border-bottom: 2px solid white;
-            padding-bottom: 5px;
-        }
-        .sub-section {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .sub-section label {
-            margin-right: 10px;
-        }
-        input[type="checkbox"] {
-            display: none;
-        }
-        label[for] {
-            font-size: 24px;
-            cursor: pointer;
-        }
-        input.yes:checked + label {
-            color: green;
-        }
-        input.no:checked + label {
-            color: red;
+        .container {
+            max-width: 800px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
         }
     </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center">Furnace Shift Report</h2>
+        <form>
+            <div class="mb-3">
+                <label class="form-label">Name of the Engineer *</label>
+                <input type="text" class="form-control" required>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Technician *</label>
+                <input type="text" class="form-control" required>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">CONE DRAINS *</label><br>
+                <input type="radio" name="cone_drain" value="YES"> YES
+                <input type="radio" name="cone_drain" value="NO"> NO
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Cleaning *</label><br>
+                <input type="radio" name="cleaning" value="YES"> YES
+                <input type="radio" name="cleaning" value="NO"> NO
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Equipments Running Status *</label><br>
+                <input type="radio" name="equipment_status" value="YES"> YES
+                <input type="radio" name="equipment_status" value="NO"> NO
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Pumps Running Status *</label><br>
+                <select class="form-select" required>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="BOTH">Both</option>
+                </select>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Spillages *</label><br>
+                <input type="radio" name="spillages" value="YES"> YES
+                <input type="radio" name="spillages" value="NO"> NO
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Description *</label>
+                <textarea class="form-control" rows="3" required></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary w-100">Submit Report</button>
+        </form>
+    </div>
 </body>
 </html>
-
-
