@@ -103,16 +103,27 @@
         <label>Technician</label>
         <input type="text" required>
 
-        <label>CONE DRAINS</label>
         <script>
-            const coneDrains = ["CGS DRAIN", "TGS DRAIN", "HDRI DED", "BSG DED", "PCDC DED", "BSG BUBBLER"];
-            document.write(coneDrains.map(item => `
-                <label>${item}</label>
-                <div class='yes-no'>
-                    <label><input type='radio' name='${item}' value='yes'><span>✅</span></label>
-                    <label><input type='radio' name='${item}' value='no'><span>❌</span></label>
-                </div>
-            `).join(''));
+            const sections = {
+                "CONE DRAINS": ["CGS DRAIN", "TGS DRAIN", "HDRI DED", "BSG DED", "PCDC DED", "BSG BUBBLER"],
+                "CLEANING": ["FLEXOWELL RETURN SIDE", "HDRI HEAD END", "DEDUSTING DRAIN POINTS", "PELLET SPILLAGE CHUTE", "HDRI TAIL END SHED", "HDRI SAMPLER"],
+                "EQUIPMENTS RUNNING STATUS": ["HDRI FEED", "SCREW CLASSIFIER", "FURNACE JOCKEY PUMP", "HDRI DED FAN", "BSG DED FAN", "PCDC FAN", "FF ELEC MAIN PUMP"],
+                "PUMPS RUNNING STATUS": ["PCDC DED", "BSG DED", "HDRI DED", "VENTURY BOOSTER PUMP", "MCW BOOSTER PUMP", "BURDEN FEEDER RECIRCULATION"],
+                "SPILLAGES": ["FLEXOWELL WATER", "HDRI HEAD/TAIL END"]
+            };
+
+            for (const section in sections) {
+                document.write(`<label>${section}</label>`);
+                sections[section].forEach(item => {
+                    document.write(`
+                        <label>${item}</label>
+                        <div class='yes-no'>
+                            <label><input type='radio' name='${item}' value='yes'><span>✅</span></label>
+                            <label><input type='radio' name='${item}' value='no'><span>❌</span></label>
+                        </div>
+                    `);
+                });
+            }
         </script>
 
         <label>Description</label>
@@ -125,3 +136,4 @@
     </form>
 </body>
 </html>
+
