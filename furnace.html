@@ -3,137 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Furnace - Field Engineer Shift Report</title>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <style>
-        body {
-            background-color: #121212;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-        }
-        h1 {
-            color: #00bcd4;
-        }
-        form {
-            max-width: 600px;
-            margin: auto;
-            background: #1e1e1e;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 188, 212, 0.3);
-        }
-        label {
-            display: block;
-            margin: 15px 0 5px;
-            font-size: 1.2rem;
-        }
-        input, select, textarea, button {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0 15px;
-            border-radius: 5px;
-            border: none;
-            font-size: 1rem;
-        }
-        .btn-container {
-            display: flex;
-            justify-content: space-between;
-        }
-        .btn {
-            width: 48%;
-            background-color: #00bcd4;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .btn:hover {
-            background-color: #0097a7;
-        }
-        .yes-no {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        .yes-no label {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-        }
-        .yes-no input[type="radio"] {
-            display: none;
-        }
-        .yes-no label span {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            text-align: center;
-            line-height: 30px;
-            font-size: 1.5rem;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-        .yes-no input[value="yes"]:checked + span {
-            color: #00ff00;
-        }
-        .yes-no input[value="no"]:checked + span {
-            color: #ff0000;
-        }
-    </style>
+    <title>Furnace Section</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <h1>FURNACE</h1>
-    <form>
-        <label>Date</label>
-        <input type="date" required>
-        
-        <label>Shift</label>
-        <select>
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="C">C</option>
-        </select>
-
-        <label>Name of the Engineer</label>
-        <input type="text" required>
-
-        <label>Technician</label>
-        <input type="text" required>
-
-        <script>
-            const sections = {
-                "CONE DRAINS": ["CGS DRAIN", "TGS DRAIN", "HDRI DED", "BSG DED", "PCDC DED", "BSG BUBBLER"],
-                "CLEANING": ["FLEXOWELL RETURN SIDE", "HDRI HEAD END", "DEDUSTING DRAIN POINTS", "PELLET SPILLAGE CHUTE", "HDRI TAIL END SHED", "HDRI SAMPLER"],
-                "EQUIPMENTS RUNNING STATUS": ["HDRI FEED", "SCREW CLASSIFIER", "FURNACE JOCKEY PUMP", "HDRI DED FAN", "BSG DED FAN", "PCDC FAN", "FF ELEC MAIN PUMP"],
-                "PUMPS RUNNING STATUS": ["PCDC DED", "BSG DED", "HDRI DED", "VENTURY BOOSTER PUMP", "MCW BOOSTER PUMP", "BURDEN FEEDER RECIRCULATION"],
-                "SPILLAGES": ["FLEXOWELL WATER", "HDRI HEAD/TAIL END"]
-            };
-
-            for (const section in sections) {
-                document.write(`<label>${section}</label>`);
-                sections[section].forEach(item => {
-                    document.write(`
-                        <label>${item}</label>
-                        <div class='yes-no'>
-                            <label><input type='radio' name='${item}' value='yes'><span>✅</span></label>
-                            <label><input type='radio' name='${item}' value='no'><span>❌</span></label>
-                        </div>
-                    `);
-                });
-            }
-        </script>
-
-        <label>Description</label>
-        <textarea rows="3"></textarea>
-
-        <div class="btn-container">
-            <button type="submit" class="btn">Submit</button>
-            <button type="button" class="btn" onclick="history.back()">Back</button>
+    <h1>Furnace Section</h1>
+    
+    <section>
+        <h2>1. CONE DRAINS</h2>
+        <div class="sub-section">
+            <label>(i) CGS DRAIN</label>
+            <input type="checkbox" class="yes" id="cgs-yes"><label for="cgs-yes">✅</label>
+            <input type="checkbox" class="no" id="cgs-no"><label for="cgs-no">❌</label>
         </div>
-    </form>
+        <div class="sub-section">
+            <label>(ii) TGS DRAIN</label>
+            <input type="checkbox" class="yes" id="tgs-yes"><label for="tgs-yes">✅</label>
+            <input type="checkbox" class="no" id="tgs-no"><label for="tgs-no">❌</label>
+        </div>
+        <div class="sub-section">
+            <label>(iii) HDRI DED</label>
+            <input type="checkbox" class="yes" id="hdri-yes"><label for="hdri-yes">✅</label>
+            <input type="checkbox" class="no" id="hdri-no"><label for="hdri-no">❌</label>
+        </div>
+    </section>
+    
+    <section>
+        <h2>2. GAS SYSTEM</h2>
+        <div class="sub-section">
+            <label>(i) GAS VALVE</label>
+            <input type="checkbox" class="yes" id="gas-valve-yes"><label for="gas-valve-yes">✅</label>
+            <input type="checkbox" class="no" id="gas-valve-no"><label for="gas-valve-no">❌</label>
+        </div>
+        <div class="sub-section">
+            <label>(ii) BURNER CHECK</label>
+            <input type="checkbox" class="yes" id="burner-yes"><label for="burner-yes">✅</label>
+            <input type="checkbox" class="no" id="burner-no"><label for="burner-no">❌</label>
+        </div>
+    </section>
+
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        h2 {
+            border-bottom: 2px solid white;
+            padding-bottom: 5px;
+        }
+        .sub-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .sub-section label {
+            margin-right: 10px;
+        }
+        input[type="checkbox"] {
+            display: none;
+        }
+        label[for] {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        input.yes:checked + label {
+            color: green;
+        }
+        input.no:checked + label {
+            color: red;
+        }
+    </style>
 </body>
 </html>
+
 
