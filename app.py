@@ -8,7 +8,13 @@ app = Flask(__name__)
 SHEET_ID = "1LegE5pSPl06OTynxjIxqzGVEtdiiDh8uBQc-k35Upys"
 SCOPES = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 
-credentials = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", SCOPES)
+import os
+
+CREDENTIALS_PATH = "FIELD-ENGINEER-SHIFT-REPORT-/credentials.json"  # Use Render Secret File path
+
+credentials = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_PATH, SCOPES)
+client = gspread.authorize(credentials)
+
 client = gspread.authorize(credentials)
 sheet = client.open_by_key(SHEET_ID)
 
