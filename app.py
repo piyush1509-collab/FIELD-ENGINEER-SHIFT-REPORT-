@@ -1,12 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+import os
 
-app = Flask(__name__)
+# Correct Path for Render Secret File
+CREDENTIALS_PATH = "/etc/secrets/credentials.json"
 
-# Google Sheets API Setup
-SHEET_ID = "1LegE5pSPl06OTynxjIxqzGVEtdiiDh8uBQc-k35Upys"
 SCOPES = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+credentials = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_PATH, SCOPES)
+client = gspread.authorize(credentials)
+sheet = client.open_by_key("1LegE5pSPl06OTynxjIxqzGVEtdiiDh8uBQc-k35Upys")
 
 import os
 
