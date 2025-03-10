@@ -25,8 +25,14 @@ sheet = client.open_by_key(SHEET_ID)
 
 # Function to store data in the correct sheet
 def store_data(area, date, engineer, technician, description, shift):
-    worksheet = sheet.worksheet(area)  # Get the correct sheet (Furnace, Pump House, etc.)
+    area = area.replace(".html", "")  # ✅ Remove `.html` from the sheet name
+    try:
+        worksheet = sheet.worksheet(area)  # Get the correct sheet (Furnace, Pump House, etc.)
+    except gspread.exceptions.WorksheetNotFound:
+        raise ValueError(f"Worksheet '{area}' not found in Google Sheets")
+
     worksheet.append_row([date, engineer, technician, description, shift])  # Append data
+
     
 from flask import send_from_directory
 
