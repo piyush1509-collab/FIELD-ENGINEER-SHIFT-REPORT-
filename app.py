@@ -20,7 +20,7 @@ credentials = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_PATH,
 client = gspread.authorize(credentials)
 
 # Open the Google Sheet by its key
-SHEET_ID = 'your_google_sheet_id_here'  # Replace with actual Google Sheet ID
+SHEET_ID = '1LegE5pSPl06OTynxjIxqzGVEtdiiDh8uBQc-k35Upys'  # Replace with actual Google Sheet ID
 sheet = client.open_by_key(SHEET_ID)
 
 # Function to store data in the correct sheet
