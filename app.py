@@ -2,17 +2,17 @@ from flask import Flask, render_template, request, redirect, url_for
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import os
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
 
-# Define the path to 'credentials.json' relative to this script
+app = Flask(__name__)
+
+# ✅ Correctly locate 'credentials.json' within the GitHub repository
 CREDENTIALS_PATH = os.path.join(os.path.dirname(__file__), 'credentials.json')
 
 # Check if the credentials file exists
 if not os.path.exists(CREDENTIALS_PATH):
     raise FileNotFoundError(f"Credentials file not found: {CREDENTIALS_PATH}")
 
-# Define the required scopes
+# Define Google Sheets API scopes
 SCOPES = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 
 # Authenticate using the service account credentials
@@ -20,18 +20,7 @@ credentials = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_PATH,
 client = gspread.authorize(credentials)
 
 # Open the Google Sheet by its key
-SHEET_ID = 'your_google_sheet_id_here'  # Replace with your actual Google Sheet ID
-sheet = client.open_by_key(SHEET_ID)
-
-
-import os
-
-CREDENTIALS_PATH = "FIELD-ENGINEER-SHIFT-REPORT-/credentials.json"  # Use Render Secret File path
-
-credentials = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_PATH, SCOPES)
-client = gspread.authorize(credentials)
-
-client = gspread.authorize(credentials)
+SHEET_ID = 'your_google_sheet_id_here'  # Replace with actual Google Sheet ID
 sheet = client.open_by_key(SHEET_ID)
 
 # Function to store data in the correct sheet
