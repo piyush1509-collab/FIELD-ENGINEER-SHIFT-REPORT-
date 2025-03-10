@@ -24,6 +24,7 @@ SHEET_ID = '1LegE5pSPl06OTynxjIxqzGVEtdiiDh8uBQc-k35Upys'  # Replace with actual
 sheet = client.open_by_key(SHEET_ID)
 
 # Ensure correct mapping of area names to Google Sheets tab names
+# Ensure correct mapping of area names to Google Sheets tab names
 AREA_MAPPING = {
     "Furnace": "Furnace",
     "Pump-House": "Pump House",
@@ -33,18 +34,17 @@ AREA_MAPPING = {
 }
 
 def store_data(area, date, engineer, technician, description, shift):
-    area = area.replace(".html", "").title().replace(" ", "-")  # Ensure consistent formatting
+    area = area.replace(".html", "").replace("-", " ").title()  # ✅ Fix capitalization & spacing
 
     if area in AREA_MAPPING:
         area = AREA_MAPPING[area]  # Convert to correct Google Sheet tab name
 
     try:
-        worksheet = sheet.worksheet(area)  # Get the correct sheet (Furnace, Pump House, etc.)
+        worksheet = sheet.worksheet(area)  # ✅ Get the correct sheet
     except gspread.exceptions.WorksheetNotFound:
         raise ValueError(f"Worksheet '{area}' not found in Google Sheets. Make sure the sheet name is correct.")
 
-    worksheet.append_row([date, engineer, technician, description, shift])  # Append data
-
+    worksheet.append_row([date, engineer, technician, description, shift])  # ✅ Append data
     
 from flask import send_from_directory
 
@@ -68,18 +68,9 @@ def report(area):
 
         store_data(area, date, engineer, technician, description, shift)
         
-        # ✅ Fix: Show success message instead of redirecting home
-        return f"<h2>Report submitted successfully for {area}.</h2>"
+        return f"<h2>Report submitted successfully for {area}.</h2>"  # ✅ Success message
 
-    return render_template(f"{area}.html")
-
-    # ✅ Fix: Prevent `.html.html` duplication
-    if not area.endswith(".html"):
-        template_name = f"{area}.html"
-    else:
-        template_name = area  # Already has `.html`
-
-    return render_template(template_name)
+    return render_template(f"{area}.html")  # ✅ Correct return statement
 
 if __name__ == "__main__":
     app.run(debug=True)
