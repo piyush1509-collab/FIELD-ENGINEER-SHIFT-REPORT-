@@ -3,8 +3,12 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import os
 
-# Correct Path for Render Secret File
-CREDENTIALS_PATH = "/etc/secrets/credentials.json"
+# ✅ Correct path inside your GitHub repository
+CREDENTIALS_PATH = os.path.join(os.path.dirname(__file__), "credentials.json")
+
+# Check if the file exists before using it
+if not os.path.exists(CREDENTIALS_PATH):
+    raise FileNotFoundError(f"Credentials file not found: {CREDENTIALS_PATH}")
 
 SCOPES = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 credentials = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_PATH, SCOPES)
