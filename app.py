@@ -34,17 +34,22 @@ AREA_MAPPING = {
 }
 
 def store_data(area, date, engineer, technician, description, shift):
-    area = area.replace(".html", "").replace("-", " ").title()  # ✅ Fix capitalization & spacing
+    area = area.lower().replace(".html", "").replace("-", " ")  # ✅ Fix spacing
 
     if area in AREA_MAPPING:
-        area = AREA_MAPPING[area]  # Convert to correct Google Sheet tab name
+        area = AREA_MAPPING[area]  # ✅ Convert to correct Google Sheet tab name
+
+    print(f"DEBUG: Saving report to Google Sheet tab: {area}")  # ✅ Debug print
 
     try:
         worksheet = sheet.worksheet(area)  # ✅ Get the correct sheet
     except gspread.exceptions.WorksheetNotFound:
-        raise ValueError(f"Worksheet '{area}' not found in Google Sheets. Make sure the sheet name is correct.")
+        print(f"ERROR: Worksheet '{area}' not found in Google Sheets.")  # ✅ Print error
+        return  # ✅ Prevent app from crashing
 
-    worksheet.append_row([date, engineer, technician, description, shift])  # ✅ Append data
+    worksheet.append_row([date, engineer, technician, description, shift])  # ✅ Save data
+    print(f"DEBUG: Report successfully saved in {area} section.")
+
     
 from flask import send_from_directory
 
