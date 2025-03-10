@@ -51,8 +51,12 @@ def report(area):
         store_data(area, date, engineer, technician, description, shift)
         return redirect(url_for("home"))
 
-    # ✅ Fix: Ensure only one `.html` is appended
-    template_name = f"{area}.html"
+    # ✅ Fix: Prevent `.html.html` duplication
+    if not area.endswith(".html"):
+        template_name = f"{area}.html"
+    else:
+        template_name = area  # Already has `.html`
+
     return render_template(template_name)
 
 if __name__ == "__main__":
