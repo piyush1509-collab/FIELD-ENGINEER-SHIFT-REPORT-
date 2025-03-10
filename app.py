@@ -27,6 +27,12 @@ sheet = client.open_by_key(SHEET_ID)
 def store_data(area, date, engineer, technician, description, shift):
     worksheet = sheet.worksheet(area)  # Get the correct sheet (Furnace, Pump House, etc.)
     worksheet.append_row([date, engineer, technician, description, shift])  # Append data
+    
+from flask import send_from_directory
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 # Routes for each area
 @app.route("/")
