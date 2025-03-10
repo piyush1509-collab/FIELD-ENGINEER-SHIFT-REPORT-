@@ -2,18 +2,27 @@ from flask import Flask, render_template, request, redirect, url_for
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import os
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 
-# ✅ Correct path inside your GitHub repository
-CREDENTIALS_PATH = os.path.join(os.path.dirname(__file__), "credentials.json")
+# Define the path to 'credentials.json' relative to this script
+CREDENTIALS_PATH = os.path.join(os.path.dirname(__file__), 'credentials.json')
 
-# Check if the file exists before using it
+# Check if the credentials file exists
 if not os.path.exists(CREDENTIALS_PATH):
     raise FileNotFoundError(f"Credentials file not found: {CREDENTIALS_PATH}")
 
+# Define the required scopes
 SCOPES = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+
+# Authenticate using the service account credentials
 credentials = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_PATH, SCOPES)
 client = gspread.authorize(credentials)
-sheet = client.open_by_key("1LegE5pSPl06OTynxjIxqzGVEtdiiDh8uBQc-k35Upys")
+
+# Open the Google Sheet by its key
+SHEET_ID = 'your_google_sheet_id_here'  # Replace with your actual Google Sheet ID
+sheet = client.open_by_key(SHEET_ID)
+
 
 import os
 
