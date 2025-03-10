@@ -23,6 +23,7 @@ client = gspread.authorize(credentials)
 SHEET_ID = '1LegE5pSPl06OTynxjIxqzGVEtdiiDh8uBQc-k35Upys'  # Replace with actual Google Sheet ID
 sheet = client.open_by_key(SHEET_ID)
 
+# Ensure correct mapping of area names to Google Sheets tab names
 AREA_MAPPING = {
     "Furnace": "Furnace",
     "Pump-House": "Pump House",
@@ -30,13 +31,13 @@ AREA_MAPPING = {
     "Dispatch": "Dispatch",
     "Material-Handling": "Material Handling"
 }
-# Function to store data in the correct sheet
+
 def store_data(area, date, engineer, technician, description, shift):
-    area = area.replace(".html", "").title()  # ✅ Capitalize first letter of each word
-    
- if area in AREA_MAPPING:
+    area = area.replace(".html", "").title().replace(" ", "-")  # Ensure consistent formatting
+
+    if area in AREA_MAPPING:
         area = AREA_MAPPING[area]  # Convert to correct Google Sheet tab name
-     
+
     try:
         worksheet = sheet.worksheet(area)  # Get the correct sheet (Furnace, Pump House, etc.)
     except gspread.exceptions.WorksheetNotFound:
