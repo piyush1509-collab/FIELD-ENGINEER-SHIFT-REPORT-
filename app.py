@@ -25,11 +25,12 @@ sheet = client.open_by_key(SHEET_ID)
 
 # Function to store data in the correct sheet
 def store_data(area, date, engineer, technician, description, shift):
-    area = area.replace(".html", "")  # ✅ Remove `.html` from the sheet name
+    area = area.replace(".html", "").title()  # ✅ Capitalize first letter of each word
+
     try:
         worksheet = sheet.worksheet(area)  # Get the correct sheet (Furnace, Pump House, etc.)
     except gspread.exceptions.WorksheetNotFound:
-        raise ValueError(f"Worksheet '{area}' not found in Google Sheets")
+        raise ValueError(f"Worksheet '{area}' not found in Google Sheets. Make sure the sheet name is correct.")
 
     worksheet.append_row([date, engineer, technician, description, shift])  # Append data
 
