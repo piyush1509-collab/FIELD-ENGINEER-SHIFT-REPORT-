@@ -104,34 +104,7 @@
     <textarea id="description" placeholder="Enter shift details..."></textarea>
 
     <div class="button-container">
-        <form method="POST">
-    <input type="hidden" name="area" value="Gas Zone">  <!-- ✅ Fix: Pass correct area -->
-
-    <label for="date">Date:</label>
-    <input type="date" name="date" required>
-
-    <label for="shift">Shift:</label>
-    <select name="shift">
-        <option value="A">A</option>
-        <option value="B">B</option>
-        <option value="C">C</option>
-    </select>
-
-    <label for="engineer">Name of the Engineer:</label>
-    <input type="text" name="engineer" required>
-
-    <label for="technician">Name of the Technician:</label>
-    <input type="text" name="technician" required>
-
-    <label for="description">Description:</label>
-    <textarea name="description" required></textarea>
-
-    <div class="button-container">
-        <button class="submit-btn" type="submit">Submit Report</button>
-        <button class="back-btn" type="button" onclick="history.back()">Back</button>
-    </div>
-</form>
-
+        <button class="submit-btn" onclick="submitReport()">Submit Report</button>
         <button class="back-btn" onclick="goBack()">Back</button>
     </div>
 </div>
