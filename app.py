@@ -67,10 +67,17 @@ def report(area):
         shift = request.form.get("shift")
 
         store_data(area, date, engineer, technician, description, shift)
-        
-        return f"<h2>Report submitted successfully for {area}.</h2>"  # ✅ Success message
 
-    return render_template(f"{area}.html")  # ✅ Correct return statement
+        return f"<h2>Report submitted successfully for {area}.</h2>"
+
+    # ✅ Fix: Ensure `.html` is not added twice
+    if not area.endswith(".html"):
+        template_name = f"{area}.html"
+    else:
+        template_name = area  # Already has `.html`
+
+    return render_template(template_name)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
