@@ -66,7 +66,12 @@ def report(area):
         shift = request.form.get("shift")
 
         store_data(area, date, engineer, technician, description, shift)
-        return redirect(url_for("home"))
+        
+        # ✅ Fix: Show success message instead of redirecting home
+        return f"<h2>Report submitted successfully for {area}.</h2>"
+
+    return render_template(f"{area}.html")
+)
 
     # ✅ Fix: Prevent `.html.html` duplication
     if not area.endswith(".html"):
