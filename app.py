@@ -72,7 +72,6 @@ def report(area):
         return f"<h2>Report submitted successfully for {area}.</h2>"
 
     return render_template(f"{area}.html")
-)
 
     # ✅ Fix: Prevent `.html.html` duplication
     if not area.endswith(".html"):
