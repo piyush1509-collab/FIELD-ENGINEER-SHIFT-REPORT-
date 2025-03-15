@@ -82,31 +82,40 @@
 <div class="container">
     <h2>PUMP HOUSE Shift Report</h2>
     
-   <form method="POST">
-    <label for="date">Date:</label>
+  <form id="shiftReportForm">
+    <label>Date:</label>
     <input type="date" name="date" required>
 
-    <label for="shift">Shift:</label>
+    <label>Shift:</label>
     <select name="shift">
         <option value="A">A</option>
         <option value="B">B</option>
         <option value="C">C</option>
     </select>
 
-    <label for="engineer">Name of the Engineer:</label>
-    <input type="text" name="engineer" placeholder="Enter engineer's name" required>
+    <label>Name of Engineer:</label>
+    <input type="text" name="engineer" required>
 
-    <label for="technician">Name of the Technician:</label>
-    <input type="text" name="technician" placeholder="Enter technician's name" required>
+    <label>Name of Technician:</label>
+    <input type="text" name="technician" required>
 
-    <label for="description">Description:</label>
-    <textarea name="description" placeholder="Enter shift details..." required></textarea>
+    <label>Description:</label>
+    <textarea name="description" rows="4" required></textarea>
 
     <div class="button-container">
         <button class="submit-btn" type="submit">Submit Report</button>
         <button class="back-btn" type="button" onclick="history.back()">Back</button>
     </div>
 </form>
+
+<!-- ✅ Step 3: Add This Popup for Success Message -->
+<div id="successPopup" class="popup">
+    <div class="popup-content">
+        <p>✅ Your Shift Report has been Submitted Successfully!</p>
+        <button onclick="closePopup()">OK</button>
+    </div>
+</div>
+
 
 <script>
     function submitReport() {
@@ -117,6 +126,56 @@
     function goBack() {
         window.history.back();
     }
+</script>
+<style>
+    /* ✅ Popup Modal Styling */
+    .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #1e1e1e;
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+        text-align: center;
+        width: 300px;
+    }
+    .popup-content button {
+        background-color: #00bcd4;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+</style>
+<script>
+document.getElementById("shiftReportForm").addEventListener("submit", function(event) {
+    event.preventDefault();  // ✅ Prevent page reload
+
+    // ✅ Send form data to Flask using Fetch API
+    fetch("", {
+        method: "POST",
+        body: new FormData(this)
+    })
+    .then(response => response.text())
+    .then(data => {
+        // ✅ Show popup message
+        document.getElementById("successPopup").style.display = "block";
+        // ✅ Clear form fields after submission
+        document.getElementById("shiftReportForm").reset();
+    })
+    .catch(error => console.error("Error submitting form:", error));
+});
+
+// ✅ Close the popup
+function closePopup() {
+    document.getElementById("successPopup").style.display = "none";
+}
 </script>
 
 </body>
