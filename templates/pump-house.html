@@ -104,31 +104,7 @@
     <textarea id="description" placeholder="Enter shift details..."></textarea>
 
     <div class="button-container">
-       <form method="POST">
-    <label for="date">Date:</label>
-    <input type="date" name="date" required>
-    
-    <label for="shift">Shift:</label>
-    <select name="shift">
-        <option value="A">A</option>
-        <option value="B">B</option>
-        <option value="C">C</option>
-    </select>
-
-    <label for="engineer">Name of the Engineer:</label>
-    <input type="text" name="engineer" placeholder="Enter engineer's name" required>
-
-    <label for="technician">Name of the Technician:</label>
-    <input type="text" name="technician" placeholder="Enter technician's name" required>
-
-    <label for="description">Description:</label>
-    <textarea name="description" placeholder="Enter shift details..." required></textarea>
-
-    <div class="button-container">
-        <button class="submit-btn" type="submit">Submit Report</button>
-        <button class="back-btn" type="button" onclick="history.back()">Back</button>
-    </div>
-</form>
+        <button class="submit-btn" onclick="submitReport()">Submit Report</button>
         <button class="back-btn" onclick="goBack()">Back</button>
     </div>
 </div>
