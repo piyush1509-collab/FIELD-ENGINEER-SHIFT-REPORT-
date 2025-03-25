@@ -82,7 +82,7 @@ def report(area):
         description = request.form.get("description")
         shift = request.form.get("shift")
 
-        # ✅ Capture seal pot data from the form
+        # ✅ Correctly capture seal pot data
         seal_pot_data = [
             request.form.get("corex_gas"),
             request.form.get("cog_top"),
@@ -105,26 +105,6 @@ def report(area):
         template_name = area  # Already has `.html`
 
     return render_template(template_name)
-
-    if request.method == "POST":
-        date = request.form.get("date")
-        engineer = request.form.get("engineer")
-        technician = request.form.get("technician")
-        description = request.form.get("description")
-        shift = request.form.get("shift")
-
-        store_data(area, date, engineer, technician, description, shift)
-
-        return f"<h2>Report submitted successfully for {area}.</h2>"
-
-    # ✅ Fix: Ensure `.html` is not added twice
-    if not area.endswith(".html"):
-        template_name = f"{area}.html"
-    else:
-        template_name = area  # Already has `.html`
-
-    return render_template(template_name)
-
 
 if __name__ == "__main__":
     app.run(debug=True)
