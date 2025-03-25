@@ -33,7 +33,21 @@ AREA_MAPPING = {
     "Material-Handling": "Material Handling"
 }
 
-def store_data(area, date, engineer, technician, description, shift):
+def store_data(area, date, engineer, technician, description, shift, seal_pot_data):
+    area = area.replace(".html", "").replace("-", " ").title()  # ✅ Fix capitalization & spacing
+
+    if area in AREA_MAPPING:
+        area = AREA_MAPPING[area]  # Convert to correct Google Sheet tab name
+
+    try:
+        worksheet = sheet.worksheet(area)  # ✅ Get the correct sheet
+    except gspread.exceptions.WorksheetNotFound:
+        raise ValueError(f"Worksheet '{area}' not found in Google Sheets. Make sure the sheet name is correct.")
+
+    # ✅ Prepare row with seal pot data
+    row_data = [date, engineer, technician, description, shift] + seal_pot_data
+    worksheet.append_row(row_data)  # ✅ Append data to Google Sheets
+
     area = area.replace(".html", "").replace("-", " ").title()  # ✅ Fix capitalization & spacing
 
     if area in AREA_MAPPING:
@@ -59,6 +73,37 @@ def home():
 
 @app.route("/<area>", methods=["GET", "POST"])
 def report(area):
+    if request.method == "POST":
+        date = request.form.get("date")
+        engineer = request.form.get("engineer")
+        technician = request.form.get("technician")
+        description = request.form.get("description")
+        shift = request.form.get("shift")
+
+        # ✅ Capture seal pot data from the form
+        seal_pot_data = [
+            request.form.get("corex_gas"),
+            request.form.get("cog_top"),
+            request.form.get("fabric_filter"),
+            request.form.get("psa_header"),
+            request.form.get("rgc_suction"),
+            request.form.get("rgc_discharge"),
+            request.form.get("rgc_condensate"),
+        ]
+
+        # ✅ Pass new data to store_data function
+        store_data(area, date, engineer, technician, description, shift, seal_pot_data)
+
+        return f"<h2>Report submitted successfully for {area}.</h2>"
+
+    # ✅ Fix: Ensure `.html` is not added twice
+    if not area.endswith(".html"):
+        template_name = f"{area}.html"
+    else:
+        template_name = area  # Already has `.html`
+
+    return render_template(template_name)
+
     if request.method == "POST":
         date = request.form.get("date")
         engineer = request.form.get("engineer")
