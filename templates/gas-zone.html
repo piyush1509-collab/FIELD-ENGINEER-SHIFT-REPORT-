@@ -166,8 +166,6 @@
     </div>
 </div>
 
-</form>
-
 <script>
     function submitReport() {
         alert("Report submitted successfully!");
@@ -205,8 +203,16 @@
     }
 </style>
 <script>
+let isSubmitting = false;  // ✅ Prevent duplicate submissions
+
 document.getElementById("shiftReportForm").addEventListener("submit", function(event) {
     event.preventDefault();  // ✅ Prevent page reload
+
+    if (isSubmitting) {
+        return;  // ✅ Stop if form is already submitting
+    }
+
+    isSubmitting = true;  // ✅ Lock submission
 
     // ✅ Send form data to Flask using Fetch API
     fetch("", {
@@ -220,8 +226,12 @@ document.getElementById("shiftReportForm").addEventListener("submit", function(e
         // ✅ Clear form fields after submission
         document.getElementById("shiftReportForm").reset();
     })
-    .catch(error => console.error("Error submitting form:", error));
+    .catch(error => console.error("Error submitting form:", error))
+    .finally(() => {
+        isSubmitting = false;  // ✅ Unlock submission after processing
+    });
 });
+
 
 // ✅ Close the popup
 function closePopup() {
