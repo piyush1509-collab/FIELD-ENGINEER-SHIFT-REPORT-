@@ -33,15 +33,6 @@ AREA_MAPPING = {
     "Material-Handling": "Material Handling"
 }
 
-@app.route("/<area>", methods=["GET", "POST"])
-def report(area):
-    if request.method == "POST":
-        date = request.form.get("date")
-        engineer = request.form.get("engineer")
-        technician = request.form.get("technician")
-        description = request.form.get("description")
-        shift = request.form.get("shift")
-
         # ✅ Capture seal pot data from the form
         seal_pot_data = [
             request.form.get("corex_gas"),
