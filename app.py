@@ -33,21 +33,31 @@ AREA_MAPPING = {
     "Material-Handling": "Material Handling"
 }
 
-def store_data(area, date, engineer, technician, description, shift, seal_pot_data):
-   def store_data(area, date, engineer, technician, description, shift, seal_pot_data):
-    area = area.replace(".html", "").replace("-", " ").title()  # ✅ Fix capitalization & spacing
+@app.route("/<area>", methods=["GET", "POST"])
+def report(area):
+    if request.method == "POST":
+        date = request.form.get("date")
+        engineer = request.form.get("engineer")
+        technician = request.form.get("technician")
+        description = request.form.get("description")
+        shift = request.form.get("shift")
 
-    if area in AREA_MAPPING:
-        area = AREA_MAPPING[area]  # Convert to correct Google Sheet tab name
+        # ✅ Capture seal pot data from the form
+        seal_pot_data = [
+            request.form.get("corex_gas"),
+            request.form.get("cog_top"),
+            request.form.get("fabric_filter"),
+            request.form.get("psa_header"),
+            request.form.get("rgc_suction"),
+            request.form.get("rgc_discharge"),
+            request.form.get("rgc_condensate"),
+        ]
 
-    try:
-        worksheet = sheet.worksheet(area)  # ✅ Get the correct sheet
-    except gspread.exceptions.WorksheetNotFound:
-        raise ValueError(f"Worksheet '{area}' not found in Google Sheets. Make sure the sheet name is correct.")
+        # ✅ Call store_data to append the row
+        store_data(area, date, engineer, technician, description, shift, seal_pot_data)
 
-    # ✅ Prepare row with seal pot data
-    row_data = [date, engineer, technician, description, shift] + seal_pot_data
-    worksheet.append_row(row_data)  # ✅ Append data to Google Sheets
+        return f"<h2>Report submitted successfully for {area}.</h2>"
+
 
     area = area.replace(".html", "").replace("-", " ").title()  # ✅ Fix capitalization & spacing
 
