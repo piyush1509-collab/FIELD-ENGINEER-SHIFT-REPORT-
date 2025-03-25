@@ -34,6 +34,7 @@ AREA_MAPPING = {
 }
 
 def store_data(area, date, engineer, technician, description, shift, seal_pot_data):
+   def store_data(area, date, engineer, technician, description, shift, seal_pot_data):
     area = area.replace(".html", "").replace("-", " ").title()  # ✅ Fix capitalization & spacing
 
     if area in AREA_MAPPING:
