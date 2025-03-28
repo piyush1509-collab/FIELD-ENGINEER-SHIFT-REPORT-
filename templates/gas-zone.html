@@ -1,219 +1,369 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <meta charset="UTF-8">
-    <title>Gas Zone - Field Engineer Shift Report</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAS ZONE Shift Report</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #1e1e1e;
-            color: #fff;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            background-color: #2e2e2e;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 95%;
-            max-width: 1200px;
-            margin: 20px auto;
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border: 1px solid #444;
-        }
-
-        th {
-            background-color: #3e3e3e;
-        }
-
-        .button-container {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .submit-btn, .back-btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 5px;
-        }
-
-        .back-btn {
-            background-color: #f44336;
-        }
+       body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* ✅ Fix: Align content at the top */
+    height: 100vh;
+    overflow-y: auto; /* ✅ Enable scroll for the form */
+}
 
         @media screen and (max-width: 768px) {
-            table {
-                display: block;
-                width: 100%;
-                overflow-x: auto;
-            }
+    table {
+        display: block;
+        width: 100%;
+        overflow-x: auto; /* ✅ Allow horizontal scroll */
+    }
 
-            th, td {
-                white-space: nowrap;
-            }
+    th, td {
+        white-space: nowrap; /* ✅ Prevent text wrapping */
+    }
 
-            .container {
-                width: 100%;
-                padding: 10px;
-            }
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+        
+      .container {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 95%; /* ✅ Use wider width for larger content */
+    max-width: 1200px; /* ✅ Cap the width to prevent overflow */
+    margin: 20px auto;
+    overflow-x: auto; /* ✅ Enable horizontal scroll if needed */
+    overflow-y: auto;
+}
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #00bcd4;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            background-color: #2c2c2c;
+            border: 1px solid #444;
+            color: white;
+            border-radius: 4px;
+            outline: none;
+        }
+        textarea {
+            height: 80px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px;
+            width: 48%;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .submit-btn {
+            background-color: #00bcd4;
+            color: white;
+        }
+        .back-btn {
+            background-color: #444;
+            color: white;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+        .top-section {
+            display: flex;
+            justify-content: space-between;
         }
     </style>
 </head>
 <body>
 
-    <h2 style="text-align: center;">Gas Zone - Field Engineer Shift Report</h2>
+<div class="container">
+    <h2>GAS ZONE shift Report</h2>
+    
+    <form id="shiftReportForm">
+    <label>Date:</label>
+    <input type="date" name="date" required>
 
-    <form action="/gas-zone" method="POST">
+    <label>Shift:</label>
+    <select name="shift">
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+    </select>
 
-        <!-- Seal Pot Healthyness Section -->
-        <div class="container">
-            <h4>SEAL POT HEALTHYNESS *</h4>
-            <table border="1" width="100%" cellpadding="10" cellspacing="0">
-                <tr>
-                    <th>Equipment</th>
-                    <th>YES</th>
-                    <th>NO</th>
-                </tr>
-                <tr>
-                    <td>Corex Gas</td>
-                    <td><input type="radio" name="corex_gas" value="YES" required></td>
-                    <td><input type="radio" name="corex_gas" value="NO" required></td>
-                </tr>
-                <tr>
-                    <td>COG Top</td>
-                    <td><input type="radio" name="cog_top" value="YES" required></td>
-                    <td><input type="radio" name="cog_top" value="NO" required></td>
-                </tr>
-                <tr>
-                    <td>Fabric Filter</td>
-                    <td><input type="radio" name="fabric_filter" value="YES" required></td>
-                    <td><input type="radio" name="fabric_filter" value="NO" required></td>
-                </tr>
-                <tr>
-                    <td>PSA Header</td>
-                    <td><input type="radio" name="psa_header" value="YES" required></td>
-                    <td><input type="radio" name="psa_header" value="NO" required></td>
-                </tr>
-                <tr>
-                    <td>RGC Suction</td>
-                    <td><input type="radio" name="rgc_suction" value="YES" required></td>
-                    <td><input type="radio" name="rgc_suction" value="NO" required></td>
-                </tr>
-                <tr>
-                    <td>RGC Discharge</td>
-                    <td><input type="radio" name="rgc_discharge" value="YES" required></td>
-                    <td><input type="radio" name="rgc_discharge" value="NO" required></td>
-                </tr>
-                <tr>
-                    <td>RGC Condensate</td>
-                    <td><input type="radio" name="rgc_condensate" value="YES" required></td>
-                    <td><input type="radio" name="rgc_condensate" value="NO" required></td>
-                </tr>
-            </table>
-        </div>
+    <label>Name of Engineer:</label>
+    <input type="text" name="engineer" required>
 
-        <!-- Equipment Running Status Section -->
-        <div class="container">
-            <h4>EQUIPMENT RUNNING STATUS *</h4>
-            <table border="1" width="100%" cellpadding="10" cellspacing="0">
-                <tr>
-                    <th>Equipment</th>
-                    <th>YES</th>
-                    <th>NO</th>
-                </tr>
-                <tr>
-                    <td>EGC#01</td>
-                    <td><input type="radio" name="egc_01" value="YES" required></td>
-                    <td><input type="radio" name="egc_01" value="NO" required></td>
-                </tr>
-                <tr>
-                    <td>EGC#02</td>
-                    <td><input type="radio" name="egc_02" value="YES" required></td>
-                    <td><input type="radio" name="egc_02" value="NO" required></td>
-                </tr>
-                <tr>
-                    <td>EGC#03</td>
-                    <td><input type="radio" name="egc_03" value="YES" required></td>
-                    <td><input type="radio" name="egc_03" value="NO" required></td>
-                </tr>
-                <tr>
-                    <td>RGC#01</td>
-                    <td><input type="radio" name="rgc_01" value="YES" required></td>
-                    <td><input type="radio" name="rgc_01" value="NO" required></td>
-                </tr>
-                <tr>
-                    <td>RGC#02</td>
-                    <td><input type="radio" name="rgc_02" value="YES" required></td>
-                    <td><input type="radio" name="rgc_02" value="NO" required></td>
-                </tr>
-                <tr>
-                    <td>TGB</td>
-                    <td><input type="radio" name="tgb" value="YES" required></td>
-                    <td><input type="radio" name="tgb" value="NO" required></td>
-                </tr>
-                <tr>
-                    <td>COGC</td>
-                    <td><input type="radio" name="cogc" value="YES" required></td>
-                    <td><input type="radio" name="cogc" value="NO" required></td>
-                </tr>
-            </table>
-        </div>
+    <label>Name of Technician:</label>
+    <input type="text" name="technician" required>
 
-        <!-- Heat Tracing Healthyness Section -->
-        <div class="container">
-            <h5>HEAT TRACING HEALTHYNESS *</h5>
-            <table border="1" width="100%" cellpadding="10" cellspacing="0">
-                <tr>
-                    <th>Equipment</th>
-                    <th>YES</th>
-                    <th>NO</th>
-                </tr>
-                <tr>
-                    <td>HT EGC#01</td>
-                    <td><input type="radio" name="ht_egc_01" value="YES" required></td>
-                    <td><input type="radio" name="ht_egc_01" value="NO" required></td>
-                </tr>
-                <tr>
-                    <td>HT EGC#02</td>
-                    <td><input type="radio" name="ht_egc_02" value="YES" required></td>
-                    <td><input type="radio" name="ht_egc_02" value="NO" required></td>
-                </tr>
-                <tr>
-                    <td>HT PSA Header</td>
-                    <td><input type="radio" name="ht_psa_header" value="YES" required></td>
-                    <td><input type="radio" name="ht_psa_header" value="NO" required></td>
-                </tr>
-                <tr>
-                    <td>HT PSA#01 Feed Gas Header</td>
-                    <td><input type="radio" name="ht_psa_01" value="YES" required></td>
-                    <td><input type="radio" name="ht_psa_01" value="NO" required></td>
-                </tr>
-            </table>
-        </div>
+    <label>Description:</label>
+    <textarea name="description" rows="4" required></textarea>
 
-        <!-- Submit and Back Buttons -->
-        <div class="button-container">
-            <button class="submit-btn" type="submit">Submit Report</button>
-            <button class="back-btn" type="button" onclick="history.back()">Back</button>
-        </div>
-    </form>
+        <h3>SEAL POT HEALTHYNESS *</h3>
+<table border="1" width="100%" cellpadding="10" cellspacing="0">
+    <tr>
+        <th></th>
+        <th>YES</th>
+        <th>NO</th>
+    </tr>
+    <!-- List of Seal Pots -->
+    <tr>
+        <td>COREX GAS TOP SEAL POT</td>
+        <td><input type="radio" name="corex_gas" value="YES" required></td>
+        <td><input type="radio" name="corex_gas" value="NO" required></td>
+    </tr>
+    <tr>
+        <td>COG TOP SEAL POT</td>
+        <td><input type="radio" name="cog_top" value="YES" required></td>
+        <td><input type="radio" name="cog_top" value="NO" required></td>
+    </tr>
+    <tr>
+        <td>FABRIC FILTER INLET SEAL POT</td>
+        <td><input type="radio" name="fabric_filter" value="YES" required></td>
+        <td><input type="radio" name="fabric_filter" value="NO" required></td>
+    </tr>
+    <tr>
+        <td>PSA COMMON HEADER SEAL POTS</td>
+        <td><input type="radio" name="psa_header" value="YES" required></td>
+        <td><input type="radio" name="psa_header" value="NO" required></td>
+    </tr>
+    <tr>
+        <td>RGC SUCTION SEAL POT</td>
+        <td><input type="radio" name="rgc_suction" value="YES" required></td>
+        <td><input type="radio" name="rgc_suction" value="NO" required></td>
+    </tr>
+    <tr>
+        <td>RGC DISCHARGE SEAL POT</td>
+        <td><input type="radio" name="rgc_discharge" value="YES" required></td>
+        <td><input type="radio" name="rgc_discharge" value="NO" required></td>
+    </tr>
+    <tr>
+        <td>RGC DISCHARGE CONDENSATE POT</td>
+        <td><input type="radio" name="rgc_condensate" value="YES" required></td>
+        <td><input type="radio" name="rgc_condensate" value="NO" required></td>
+    </tr>
+</table>
+
+    <!-- Corrected placement for EQUIPMENT RUNNING STATUS and HEAT TRACING HEALTHYNESS -->
+<div class="container">
+    <h4>EQUIPMENT RUNNING STATUS *</h4>
+    <table border="1" width="100%" cellpadding="10" cellspacing="0">
+    <tr>
+        <th></th>
+        <th>YES</th>
+        <th>NO</th>
+    </tr>
+    <!-- List of Equipment Status -->
+    <tr>
+        <td>EGC#01</td>
+        <td><input type="radio" name="egc_01" value="YES" required></td>
+        <td><input type="radio" name="egc_01" value="NO" required></td>
+    </tr>
+    <tr>
+        <td>EGC#02</td>
+        <td><input type="radio" name="egc_02" value="YES" required></td>
+        <td><input type="radio" name="egc_02" value="NO" required></td>
+    </tr>
+    <tr>
+        <td>EGC#03</td>
+        <td><input type="radio" name="egc_03" value="YES" required></td>
+        <td><input type="radio" name="egc_03" value="NO" required></td>
+    </tr>
+    <tr>
+        <td>RGC#01</td>
+        <td><input type="radio" name="rgc_01" value="YES" required></td>
+        <td><input type="radio" name="rgc_01" value="NO" required></td>
+    </tr>
+    <tr>
+        <td>RGC#02</td>
+        <td><input type="radio" name="rgc_02" value="YES" required></td>
+        <td><input type="radio" name="rgc_02" value="NO" required></td>
+    </tr>
+    <tr>
+        <td>TGB</td>
+        <td><input type="radio" name="tgb" value="YES" required></td>
+        <td><input type="radio" name="tgb" value="NO" required></td>
+    </tr>
+    <tr>
+        <td>COGC</td>
+        <td><input type="radio" name="cogc" value="YES" required></td>
+        <td><input type="radio" name="cogc" value="NO" required></td>
+    </tr>
+    <tr>
+        <td>PSA#01</td>
+        <td><input type="radio" name="psa_01" value="YES" required></td>
+        <td><input type="radio" name="psa_01" value="NO" required></td>
+    </tr>
+    <tr>
+        <td>PSA#02</td>
+        <td><input type="radio" name="psa_02" value="YES" required></td>
+        <td><input type="radio" name="psa_02" value="NO" required></td>
+    </tr>
+    <tr>
+        <td>PSA#03</td>
+        <td><input type="radio" name="psa_03" value="YES" required></td>
+        <td><input type="radio" name="psa_03" value="NO" required></td>
+    </tr>
+</table>
+
+<div class="container">
+    <h5>HEAT TRACING HEALTHYNESS *</h5>
+    <table border="1" width="100%" cellpadding="10" cellspacing="0">
+    <tr>
+        <th></th>
+        <th>YES</th>
+        <th>NO</th>
+    </tr>
+    <!-- List of Heat Tracing Healthyness -->
+    <tr>
+        <td>EGC#01</td>
+        <td><input type="radio" name="ht_egc_01" value="YES" required></td>
+        <td><input type="radio" name="ht_egc_01" value="NO" required></td>
+    </tr>
+    <tr>
+        <td>EGC#02</td>
+        <td><input type="radio" name="ht_egc_02" value="YES" required></td>
+        <td><input type="radio" name="ht_egc_02" value="NO" required></td>
+    </tr>
+    <tr>
+        <td>EGC#03</td>
+        <td><input type="radio" name="ht_egc_03" value="YES" required></td>
+        <td><input type="radio" name="ht_egc_03" value="NO" required></td>
+    </tr>
+    <tr>
+        <td>PSA COMMON HEADER</td>
+        <td><input type="radio" name="ht_psa_header" value="YES" required></td>
+        <td><input type="radio" name="ht_psa_header" value="NO" required></td>
+    </tr>
+    <tr>
+        <td>PSA#01 FEED GAS HEADER</td>
+        <td><input type="radio" name="ht_psa_01" value="YES" required></td>
+        <td><input type="radio" name="ht_psa_01" value="NO" required></td>
+    </tr>
+    <tr>
+        <td>PSA#02 FEED GAS HEADER</td>
+        <td><input type="radio" name="ht_psa_02" value="YES" required></td>
+        <td><input type="radio" name="ht_psa_02" value="NO" required></td>
+    </tr>
+    <tr>
+        <td>PSA#03 FEED GAS HEADER</td>
+        <td><input type="radio" name="ht_psa_03" value="YES" required></td>
+        <td><input type="radio" name="ht_psa_03" value="NO" required></td>
+    </tr>
+</table>
+
+    </div>
+</form>
+
+<!-- ✅ Step 3: Add This Popup for Success Message -->
+<div id="successPopup" class="popup">
+    <div class="popup-content">
+        <p>✅ Your Shift Report has been Submitted Successfully!</p>
+        <button onclick="closePopup()">OK</button>
+    </div>
+</div>
+
+<script>
+    function submitReport() {
+        alert("Report submitted successfully!");
+        // Here you can add logic to send the data to the backend
+    }
+    
+    function goBack() {
+        window.history.back();
+    }
+</script>
+<style>
+    /* ✅ Popup Modal Styling */
+    .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #1e1e1e;
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+        text-align: center;
+        width: 300px;
+    }
+    .popup-content button {
+        background-color: #00bcd4;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+</style>
+<script>
+let isSubmitting = false;  // ✅ Prevent duplicate submissions
+
+document.getElementById("shiftReportForm").addEventListener("submit", function(event) {
+    event.preventDefault();  // ✅ Prevent page reload
+
+    if (isSubmitting) {
+        return;  // ✅ Stop if form is already submitting
+    }
+
+    isSubmitting = true;  // ✅ Lock submission
+
+    // ✅ Send form data to Flask using Fetch API
+    fetch("", {
+        method: "POST",
+        body: new FormData(this)
+    })
+    .then(response => response.text())
+    .then(data => {
+        // ✅ Show popup message
+        document.getElementById("successPopup").style.display = "block";
+        // ✅ Clear form fields after submission
+        document.getElementById("shiftReportForm").reset();
+    })
+    .catch(error => console.error("Error submitting form:", error))
+    .finally(() => {
+        isSubmitting = false;  // ✅ Unlock submission after processing
+    });
+});
+
+
+// ✅ Close the popup
+function closePopup() {
+    document.getElementById("successPopup").style.display = "none";
+}
+</script>
 
 </body>
 </html>
+
