@@ -64,7 +64,7 @@ def report(area):
         description = request.form.get("description")
         shift = request.form.get("shift")
 
-        # Capture seal pot data from form
+                # Capture seal pot data and additional data from form
         seal_pot_data = [
             request.form.get("corex_gas"),
             request.form.get("cog_top"),
@@ -73,7 +73,17 @@ def report(area):
             request.form.get("rgc_suction"),
             request.form.get("rgc_discharge"),
             request.form.get("rgc_condensate"),
+
+            # Equipment Running Status Data
+            request.form.get("egc_01"), request.form.get("egc_02"), request.form.get("egc_03"),
+            request.form.get("rgc_01"), request.form.get("rgc_02"), request.form.get("tgb"),
+            request.form.get("cogc"), request.form.get("psa_01"), request.form.get("psa_02"), request.form.get("psa_03"),
+
+            # Heat Tracing Healthyness Data
+            request.form.get("ht_egc_01"), request.form.get("ht_egc_02"), request.form.get("ht_egc_03"),
+            request.form.get("ht_psa_header"), request.form.get("ht_psa_01"), request.form.get("ht_psa_02"), request.form.get("ht_psa_03")
         ]
+
 
         # Store the form data
         store_data(area, date, engineer, technician, description, shift, seal_pot_data)
