@@ -18,15 +18,35 @@
     height: 100vh;
     overflow-y: auto; /* ✅ Enable scroll for the form */
 }
+
+        @media screen and (max-width: 768px) {
+    table {
+        display: block;
+        width: 100%;
+        overflow-x: auto; /* ✅ Allow horizontal scroll */
+    }
+
+    th, td {
+        white-space: nowrap; /* ✅ Prevent text wrapping */
+    }
+
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
         
-        .container {
+      .container {
     background-color: #1e1e1e;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 400px;
-    max-height: 90vh; /* ✅ Limit container height */
-    overflow-y: auto; /* ✅ Add scroll if content exceeds height */
+    width: 95%; /* ✅ Use wider width for larger content */
+    max-width: 1200px; /* ✅ Cap the width to prevent overflow */
+    margin: 20px auto;
+    overflow-x: auto; /* ✅ Enable horizontal scroll if needed */
+    overflow-y: auto;
 }
 
         h2 {
@@ -157,8 +177,9 @@
         <button class="back-btn" type="button" onclick="history.back()">Back</button>
 
         <!-- Additional Sections for Equipment Running Status and Heat Tracing Healthyness -->
-<h4>EQUIPMENT RUNNING STATUS *</h4>
-<table border="1" width="100%" cellpadding="10" cellspacing="0">
+<div class="container">
+    <h4>EQUIPMENT RUNNING STATUS *</h4>
+    <table border="1" width="100%" cellpadding="10" cellspacing="0">
     <tr>
         <th></th>
         <th>YES</th>
@@ -217,8 +238,9 @@
     </tr>
 </table>
 
-<h5>HEAT TRACING HEALTHYNESS *</h5>
-<table border="1" width="100%" cellpadding="10" cellspacing="0">
+<div class="container">
+    <h5>HEAT TRACING HEALTHYNESS *</h5>
+    <table border="1" width="100%" cellpadding="10" cellspacing="0">
     <tr>
         <th></th>
         <th>YES</th>
